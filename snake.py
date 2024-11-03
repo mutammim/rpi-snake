@@ -21,7 +21,7 @@ display.LCD_ShowImage(image, 0, 0)
 SCALE = 4 # Even numbers only
 HALF_SCALE = int(SCALE / 2)
 
-def check_coords():
+def get_coord_status(x, y):
     for x in range(
         HALF_SCALE,
         display.width - HALF_SCALE,
@@ -32,9 +32,12 @@ def check_coords():
             display.height - HALF_SCALE,
             SCALE
         ):
-            print(x, y)
-
-    return
+            if player.is_coord_in_body(x, y) == True:
+                return 1
+            elif food.does_coord_have_food(x, y) == True:
+                return 2
+            else:
+                return 0
 
 class Player:
     def __init__(self):
@@ -45,6 +48,30 @@ class Player:
         for segment in self.body:
             if (segment[0] == x and segment[1] == y):
                 return True
+
+    def check_coord(x, y):
+        # TODO
+        # Do "Game Over" if you eat your tail
+        # Remove the food & grow the snake if you eat food
+        # Check the coordinate before at the beginning of move()
+        # Maybe break up other parts of move()?
+        # Create a way for the game to start with 3 pieces of food
+        # Make a new piece of food generate every time a piece is eaten
+
+        status = get_coord_status(x, y)
+
+        if (status == 1):
+            return
+            # TODO — You ate your tail!
+        
+        if (status == 2):
+            return
+            # TODO — You should grow!
+
+        # Check what you collided with
+        # Where would we find these coordinates?
+        # Coordinates of snake segments & coordinates of food
+        return
 
     def set_left(self):
         self.dir = [-1, 0]
@@ -102,12 +129,6 @@ class Player:
         # Show the action
 
         display.LCD_ShowImage(image, 0, 0)
-
-    def on_collide():
-        # Check what you collided with
-        # Where would we find these coordinates?
-        # Coordinates of snake segments & coordinates of food
-        return
 
 class Food:
     # Coordinates of the food
