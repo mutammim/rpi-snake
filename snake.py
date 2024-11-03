@@ -4,23 +4,13 @@ import LCD_1in44
 
 from PIL import Image, ImageDraw, ImageFont, ImageColor
 
-# ----------------- Set up 240x240 display with hardware SPI ----------------- #
-
 display = LCD_1in44.LCD()
 scan_direction = LCD_1in44.SCAN_DIR_DFT  #SCAN_DIR_DFT = D2U_L2R
 display.LCD_Init(scan_direction)
 display.LCD_Clear()
 
-# ---------------------- Create blank image for drawing ---------------------- #
-
 image = Image.new('RGB', (display.width, display.height))
-
-# --------------------------- Create drawing object -------------------------- #
-
 draw = ImageDraw.Draw(image)
-
-# -------------------------- Set up initial display -------------------------- #
-
 draw.rectangle((0, 0, display.width, display.height), outline=0, fill=0)
 display.LCD_ShowImage(image, 0, 0)
 
@@ -29,11 +19,32 @@ display.LCD_ShowImage(image, 0, 0)
 # ---------------------------------------------------------------------------- #
 
 SCALE = 4 # Even numbers only
+HALF_SCALE = int(SCALE / 2)
+
+def check_coords():
+    for x in range(
+        HALF_SCALE,
+        display.width - HALF_SCALE,
+        SCALE
+    ):
+        for y in range(
+            HALF_SCALE,
+            display.height - HALF_SCALE,
+            SCALE
+        ):
+            print(x, y)
+
+    return
 
 class Player:
     def __init__(self):
         self.dir = [0, 1]
         self.body = [(72, 72)]
+
+    def is_coord_in_body(self, x, y):
+        for segment in self.body:
+            if (segment[0] == x and segment[1] == y):
+                return True
 
     def set_left(self):
         self.dir = [-1, 0]
@@ -65,10 +76,10 @@ class Player:
 
         draw.rectangle(
             (
-                new_head[0] - (SCALE / 2),
-                new_head[1] - (SCALE / 2),
-                new_head[0] + (SCALE / 2),
-                new_head[1] + (SCALE / 2),
+                new_head[0] - (HALF_SCALE),
+                new_head[1] - (HALF_SCALE),
+                new_head[0] + (HALF_SCALE),
+                new_head[1] + (HALF_SCALE),
             ),
             outline=255,
             fill=0xff00
@@ -77,10 +88,10 @@ class Player:
         if did_grow == False:
             draw.rectangle(
                 (
-                    self.body[len(self.body) - 1][0] - (SCALE / 2),
-                    self.body[len(self.body) - 1][1] - (SCALE / 2),
-                    self.body[len(self.body) - 1][0] + (SCALE / 2),
-                    self.body[len(self.body) - 1][1] + (SCALE / 2),
+                    self.body[len(self.body) - 1][0] - (HALF_SCALE),
+                    self.body[len(self.body) - 1][1] - (HALF_SCALE),
+                    self.body[len(self.body) - 1][0] + (HALF_SCALE),
+                    self.body[len(self.body) - 1][1] + (HALF_SCALE),
                 ),
                 outline=0,
                 fill=0
@@ -106,7 +117,14 @@ class Food:
     def __init__(self):
         return
 
+    def does_coord_have_food(self, x, y):
+        return
+        # for segment in self.body:
+        #     if (segment[0] == x and segment[1] == y):
+        #         return True
+
 player = Player()
+food = Food()
 
 # ---------------------------------------------------------------------------- #
 #                                   Game loop                                  #
