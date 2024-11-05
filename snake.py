@@ -17,6 +17,9 @@ display.LCD_ShowImage(image, 0, 0)
 
 try:
     game = Game(draw, display, image)
+    game.player.display()
+    game.food.generate_food(3)
+
     last_move_time = time.time()
     move_interval = 1
 
@@ -37,7 +40,7 @@ try:
 
         current_time = time.time()
         if current_time - last_move_time >= move_interval:
-            game.player.move()
+            game.send_collision_status()
             last_move_time = current_time
 
         # ------------------------------ Show new image ------------------------------ #

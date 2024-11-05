@@ -6,7 +6,7 @@ class Game:
     def __init__(self, draw, display, image):
         self.score = 0
         self.player = Player(draw, display, image)
-        self.food = Food()
+        self.food = Food(draw, display, image)
 
     def get_coord_status(self, x, y):
         for x in range(
@@ -26,7 +26,7 @@ class Game:
                 else:
                     return 0
 
-    def check_for_collisions(self):
+    def send_collision_status(self):
         for x in range(
             HALF_SCALE,
             DISPLAY_WIDTH + HALF_SCALE,

@@ -31,6 +31,21 @@ class Player:
     def set_down(self):
         self.dir = [0, 1]
 
+    def display(self):
+        for segment in self.body:
+            self.draw.rectangle(
+                (
+                    segment[0] - (HALF_SCALE),
+                    segment[1] - (HALF_SCALE),
+                    segment[0] + (HALF_SCALE),
+                    segment[1] + (HALF_SCALE),
+                ),
+                outline=0xffff00,
+                fill=0xffff00
+            )
+
+        self.display.LCD_ShowImage(self.image, 0, 0)
+
     def move(self, did_grow=False):
         # ------------------------------ Add new head :0 ----------------------------- #
         current_x = self.body[0][0]
@@ -63,10 +78,10 @@ class Player:
         if did_grow == False:
             self.draw.rectangle(
                 (
-                    self.body[len(self.body) - 1][0] - (HALF_SCALE),
-                    self.body[len(self.body) - 1][1] - (HALF_SCALE),
-                    self.body[len(self.body) - 1][0] + (HALF_SCALE),
-                    self.body[len(self.body) - 1][1] + (HALF_SCALE),
+                    self.body[-1][0] - (HALF_SCALE),
+                    self.body[-1][1] - (HALF_SCALE),
+                    self.body[-1][0] + (HALF_SCALE),
+                    self.body[-1][1] + (HALF_SCALE),
                 ),
                 outline=0,
                 fill=0
@@ -77,3 +92,16 @@ class Player:
         # ------------------------- Instantly update display ------------------------- #
 
         self.display.LCD_ShowImage(self.image, 0, 0)
+
+    def handle_collision(self, collision_type):
+        if (collision_type == 1):
+            # Game over
+            return
+        
+        if (collision_type == 2):
+            # Grow a bit
+            self.move(did_grow=True)
+
+        if (collision_type == 0):
+            # Do not grow
+            self.move(did_grow=False)
