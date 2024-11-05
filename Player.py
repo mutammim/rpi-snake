@@ -5,10 +5,7 @@ from LCD_1in44 import LCD
 class Player:
     def __init__(self, draw: ImageDraw.ImageDraw, display: LCD, image: Image):
         self.dir = [0, 1]
-        self.body = [(
-            round(DISPLAY_WIDTH / 2),
-            round(DISPLAY_HEIGHT / 2)
-        )]
+        self.body = [(18, 18)]
         
         self.draw = draw
         self.display = display
@@ -37,8 +34,8 @@ class Player:
                 (
                     segment[0] - (HALF_SCALE),
                     segment[1] - (HALF_SCALE),
-                    segment[0] + (HALF_SCALE),
-                    segment[1] + (HALF_SCALE),
+                    segment[0] + (HALF_SCALE) - 1,
+                    segment[1] + (HALF_SCALE) - 1,
                 ),
                 outline=0xffff00,
                 fill=0xffff00
@@ -70,8 +67,8 @@ class Player:
             (
                 new_head[0] - (HALF_SCALE),
                 new_head[1] - (HALF_SCALE),
-                new_head[0] + (HALF_SCALE),
-                new_head[1] + (HALF_SCALE),
+                new_head[0] + (HALF_SCALE) - 1,
+                new_head[1] + (HALF_SCALE) - 1,
             ),
             outline=0xffff00,
             fill=0xffff00
@@ -84,11 +81,11 @@ class Player:
                 (
                     self.body[-1][0] - (HALF_SCALE),
                     self.body[-1][1] - (HALF_SCALE),
-                    self.body[-1][0] + (HALF_SCALE),
-                    self.body[-1][1] + (HALF_SCALE),
+                    self.body[-1][0] + (HALF_SCALE) - 1,
+                    self.body[-1][1] + (HALF_SCALE) - 1,
                 ),
-                outline=0,
-                fill=0
+                outline=0x0,
+                fill=0x0
             )
 
             self.body.pop()

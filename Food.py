@@ -20,19 +20,26 @@ class Food:
         valid_coords = range(HALF_SCALE, DISPLAY_WIDTH + HALF_SCALE, SCALE)
         return min(valid_coords, key=lambda x: abs(x - value))
 
-    def generate_food(self, quantity):
+    def generate_food(self, quantity, blocked_coords):
         for _ in range(quantity):
-            self.locations.append((
-                self.get_nearest_valid_coord(random.randint(0, DISPLAY_WIDTH)),
-                self.get_nearest_valid_coord(random.randint(0, DISPLAY_HEIGHT))
-            ))
+            location_is_valid = False
 
+            while location_is_valid == False:
+                new_location = (
+                    self.get_nearest_valid_coord(random.randint(0, DISPLAY_WIDTH)),
+                    self.get_nearest_valid_coord(random.randint(0, DISPLAY_HEIGHT))
+                )
+
+                if new_location not in blocked_coords:
+                    location_is_valid = True
+
+            self.locations.append(new_location)
             self.draw.rectangle(
                 (
                     self.locations[-1][0] - HALF_SCALE,
                     self.locations[-1][1] - HALF_SCALE,
-                    self.locations[-1][0] + HALF_SCALE,
-                    self.locations[-1][1] + HALF_SCALE,
+                    self.locations[-1][0] + HALF_SCALE - 1,
+                    self.locations[-1][1] + HALF_SCALE - 1,
                 ),
                 fill=0xff00ff,
                 outline=0xff00ff,
