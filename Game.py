@@ -27,15 +27,7 @@ class Game:
                     return 0
 
     def send_collision_status(self):
-        for x in range(
-            HALF_SCALE,
-            DISPLAY_WIDTH + HALF_SCALE,
-            SCALE
-        ):
-            for y in range(
-                HALF_SCALE,
-                DISPLAY_HEIGHT + HALF_SCALE,
-                SCALE
-            ):
-                collision_type = self.get_coord_status(x, y)
-                self.player.handle_collision(collision_type)
+        print("sending...")
+        
+        collision_type = self.get_coord_status(self.player.body[0][0], self.player.body[0][1])
+        self.player.handle_collision(collision_type)

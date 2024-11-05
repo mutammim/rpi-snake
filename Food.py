@@ -16,7 +16,7 @@ class Food:
             if location == (x, y):
                 return True
 
-    def get_nearest_valid_coord(value):
+    def get_nearest_valid_coord(self, value):
         valid_coords = range(HALF_SCALE, DISPLAY_WIDTH + HALF_SCALE, SCALE)
         return min(valid_coords, key=lambda x: abs(x - value))
 
@@ -27,10 +27,16 @@ class Food:
                 self.get_nearest_valid_coord(random.randint(0, DISPLAY_HEIGHT))
             ))
 
-            self.draw.circle(
-                self.locations[-1],
-                HALF_SCALE,
-                fill=0xff0000
+            self.draw.rectangle(
+                (
+                    self.locations[-1][0] - HALF_SCALE,
+                    self.locations[-1][1] - HALF_SCALE,
+                    self.locations[-1][0] + HALF_SCALE,
+                    self.locations[-1][1] + HALF_SCALE,
+                ),
+                fill=0xff00ff,
+                outline=0xff00ff,
+                width=HALF_SCALE,
             )
 
     def add_food(self, x, y):

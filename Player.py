@@ -47,11 +47,15 @@ class Player:
         self.display.LCD_ShowImage(self.image, 0, 0)
 
     def move(self, did_grow=False):
+        print(self.dir)
+        
         # ------------------------------ Add new head :0 ----------------------------- #
         current_x = self.body[0][0]
         current_y = self.body[0][1]
         dir_x = self.dir[0]
         dir_y = self.dir[1]
+
+        print(current_x, current_y)
 
         new_head = (
             (current_x + (dir_x * SCALE)),
