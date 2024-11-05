@@ -8,3 +8,6 @@ snake.py
 time.bmp
 __pycache__/config.cpython-311.pyc
 __pycache__/LCD_1in44.cpython-311.pyc
+snake_old.py
+__pycache__/LCD_1in44.cpython-313.pyc
+.DS_Store
