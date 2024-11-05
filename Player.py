@@ -31,7 +31,7 @@ class Player:
     def set_down(self):
         self.dir = [0, 1]
 
-    def display(self):
+    def show(self):
         for segment in self.body:
             self.draw.rectangle(
                 (

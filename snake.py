@@ -17,7 +17,7 @@ display.LCD_ShowImage(image, 0, 0)
 
 try:
     game = Game(draw, display, image)
-    game.player.display()
+    game.player.show()
     game.food.generate_food(3)
 
     last_move_time = time.time()
