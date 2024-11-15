@@ -7,6 +7,7 @@ class Game:
         self.score = 0
         self.player = Player(draw, display, image)
         self.food = Food(draw, display, image)
+        self.over = False
 
     def get_coord_status(self, x, y):
         if self.player.does_coord_have_body(x, y) == True:
@@ -23,8 +24,7 @@ class Game:
         collision_type = self.get_coord_status(next_position[0], next_position[1])
         
         if collision_type == 1:
-            print("Game over")
-            raise Exception("Game over")
+            self.over = True
 
         if collision_type == 0 or collision_type == 2:
             self.player.process_movement(collision_type)

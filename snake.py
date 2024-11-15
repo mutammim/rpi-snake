@@ -16,14 +16,13 @@ draw.rectangle((0, 0, display.width, display.height), outline=0, fill=0)
 display.LCD_ShowImage(image, 0, 0)
 
 try:
-    draw.rectangle((0, 0, display.width, display.height), outline=0, fill="gray")
-    
     title_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 12)
     subtitle_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 6)
 
     title = "Snake"
     subtitle = "Press up to start..."
 
+    draw.rectangle((0, 0, display.width, display.height), outline=0, fill="gray")
     draw.text((72, 60), title, font=title_font, fill="white", anchor="mm")
     draw.text((72, 78), subtitle, font=subtitle_font, fill="white", anchor="mm")
     display.LCD_ShowImage(image, 0, 0)
@@ -45,7 +44,7 @@ try:
     last_move_time = time.time()
     move_interval = 0.15 + (0.025 * game.score)
 
-    while True:
+    while not game.over:
         if display.digital_read(display.GPIO_KEY_UP_PIN) != 0:
             if game.player.dir == [-1, 0] or game.player.dir == [1, 0]:
                 game.player.set_up()
@@ -73,6 +72,13 @@ try:
 
         display.LCD_ShowImage(image, 0, 0)
         time.sleep(0.005)
+
+    # --------------------------------- Game over -------------------------------- #
+
+    draw.rectangle((0, 0, display.width, display.height), outline=0, fill="gray")
+    draw.text((72, 60), "Game over!", font=title_font, fill="white", anchor="mm")
+    draw.text((72, 78), game.score, font=subtitle_font, fill="white", anchor="mm")
+    display.LCD_ShowImage(image, 0, 0)
 
 except Exception as e:
     print(f"An error occurred: {e}")
