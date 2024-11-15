@@ -25,6 +25,7 @@ try:
 
     draw.text((50, 50), title, font=font, fill="white")
     draw.text((100, 100), subtitle, font=font, fill="white")
+    display.LCD_ShowImage(image, 0, 0)
 
     waiting = True
     while waiting:
