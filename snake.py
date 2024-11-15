@@ -16,6 +16,25 @@ draw.rectangle((0, 0, display.width, display.height), outline=0, fill=0)
 display.LCD_ShowImage(image, 0, 0)
 
 try:
+    draw.rectangle((0, 0, display.width, display.height), outline=0, fill="gray")
+    
+    font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 10)
+
+    title = "Snake"
+    subtitle = "Press up to start..."
+
+    draw.text((50, 50), title, font=font, fill="white")
+    draw.text((100, 100), subtitle, font=font, fill="white")
+
+    waiting = True
+    while waiting:
+        if (display.digital_read(display.GPIO_KEY_UP_PIN)) != 0:
+            waiting = False
+
+except Exception as e:
+    print(f"An error occurred: {e}")
+
+try:
     game = Game(draw, display, image)
     game.player.show()
     game.food.generate_food(3, game.player.body)
