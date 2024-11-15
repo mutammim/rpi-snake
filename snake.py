@@ -12,19 +12,16 @@ display.LCD_Clear()
 
 image = Image.new('RGB', (display.width, display.height))
 draw = ImageDraw.Draw(image)
-draw.rectangle((0, 0, display.width, display.height), outline=0, fill=0)
-display.LCD_ShowImage(image, 0, 0)
 
 try:
     draw.rectangle((0, 0, display.width, display.height), outline=0, fill="gray")
     
     font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 10)
-
     title = "Snake"
     subtitle = "Press up to start..."
 
-    draw.text((50, 50), title, font=font, fill="white")
-    draw.text((100, 100), subtitle, font=font, fill="white")
+    draw.text((0, -50), title, font=font, fill="white", anchor="center")
+    draw.text((0, 50), subtitle, font=font, fill="white", anchor="center")
     display.LCD_ShowImage(image, 0, 0)
 
     waiting = True
@@ -36,6 +33,7 @@ except Exception as e:
     print(f"An error occurred: {e}")
 
 try:
+    draw.rectangle((0, 0, display.width, display.height), outline=0, fill=0)
     game = Game(draw, display, image)
     game.player.show()
     game.food.generate_food(3, game.player.body)
