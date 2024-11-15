@@ -77,7 +77,7 @@ try:
 
     draw.rectangle((0, 0, display.width, display.height), outline=0, fill="gray")
     draw.text((72, 60), "Game over!", font=title_font, fill="white", anchor="mm")
-    draw.text((72, 78), game.score, font=subtitle_font, fill="white", anchor="mm")
+    draw.text((72, 78), (str) game.score, font=subtitle_font, fill="white", anchor="mm")
     display.LCD_ShowImage(image, 0, 0)
 
 except Exception as e:
