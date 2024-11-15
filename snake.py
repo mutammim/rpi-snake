@@ -22,8 +22,8 @@ try:
     title = "Snake"
     subtitle = "Press up to start..."
 
-    draw.text((0, -50), title, font=font, fill="white", anchor="center")
-    draw.text((0, 50), subtitle, font=font, fill="white", anchor="center")
+    draw.text((0, -50), title, font=font, fill="white")
+    draw.text((0, 50), subtitle, font=font, fill="white")
     display.LCD_ShowImage(image, 0, 0)
 
     waiting = True
