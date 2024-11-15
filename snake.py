@@ -21,7 +21,7 @@ try:
     game.food.generate_food(3, game.player.body)
 
     last_move_time = time.time()
-    move_interval = 0.4
+    move_interval = 0.2
 
     while True:
         if display.digital_read(display.GPIO_KEY_UP_PIN) != 0:
@@ -50,7 +50,7 @@ try:
         # ------------------------------ Show new image ------------------------------ #
 
         display.LCD_ShowImage(image, 0, 0)
-        time.sleep(0.01)
+        time.sleep(0.005)
 
 except Exception as e:
     print(f"An error occurred: {e}")
