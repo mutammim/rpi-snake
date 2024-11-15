@@ -52,6 +52,10 @@ class Player:
         next_x = current_x + (dir_x * SCALE)
         next_y = current_y + (dir_y * SCALE)
 
+        # Boundaries
+        next_x %= DISPLAY_WIDTH
+        next_y %= DISPLAY_HEIGHT
+
         return (next_x, next_y)
 
     def move(self, did_grow=False):        
