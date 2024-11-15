@@ -12,6 +12,8 @@ display.LCD_Clear()
 
 image = Image.new('RGB', (display.width, display.height))
 draw = ImageDraw.Draw(image)
+draw.rectangle((0, 0, display.width, display.height), outline=0, fill=0)
+display.LCD_ShowImage(image, 0, 0)
 
 try:
     draw.rectangle((0, 0, display.width, display.height), outline=0, fill="gray")
