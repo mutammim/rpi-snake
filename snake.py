@@ -43,7 +43,7 @@ try:
     game.food.generate_food(3, game.player.body)
 
     last_move_time = time.time()
-    move_interval = 0.2
+    move_interval = 0.05 + (0.01 * game.score)
 
     while True:
         if display.digital_read(display.GPIO_KEY_UP_PIN) != 0:
