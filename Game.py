@@ -9,25 +9,30 @@ class Game:
         self.food = Food(draw, display, image)
 
     def get_coord_status(self, x, y):
-        for x in range(
-            HALF_SCALE,
-            DISPLAY_WIDTH + HALF_SCALE, # Not minus, or it'd stop at 122, 122
-            SCALE
-        ):
-            for y in range(
-                HALF_SCALE,
-                DISPLAY_HEIGHT + HALF_SCALE, # Not minus for reasons above
-                SCALE
-            ):
-                if self.player.does_coord_have_body(x, y) == True:
-                    return 1
-                elif self.food.does_coord_have_food(x, y) == True:
-                    return 2
-                else:
-                    return 0
+        if self.player.does_coord_have_body(x, y) == True:
+            print("have body")
+            return 1
+        elif self.food.does_coord_have_food(x, y) == True:
+            print("have food")
+            return 2
+        else:
+            return 0
 
-    def send_collision_status(self):
-        print("sending...")
+    def iterate(self):
+        next_position = self.player.get_next_position()
+        collision_type = self.get_coord_status(next_position[0], next_position[1])
         
-        collision_type = self.get_coord_status(self.player.body[0][0], self.player.body[0][1])
-        self.player.handle_collision(collision_type)
+        if collision_type == 1:
+            print("Game over")
+            raise Exception("Game over")
+
+        if collision_type == 0 or collision_type == 2:
+            self.player.process_movement(collision_type)
+
+        if collision_type == 2:
+            self.score += 1
+            print(self.score)
+
+            self.food.remove_food(next_position[0], next_position[1])
+            # TODO: This is after the player moves, so it should be OK to generate there?
+            self.food.generate_food(1, self.player.body)

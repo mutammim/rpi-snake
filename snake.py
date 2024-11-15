@@ -21,26 +21,30 @@ try:
     game.food.generate_food(3, game.player.body)
 
     last_move_time = time.time()
-    move_interval = 1
+    move_interval = 0.4
 
     while True:
         if display.digital_read(display.GPIO_KEY_UP_PIN) != 0:
-            game.player.set_up()
+            if game.player.dir == [-1, 0] or game.player.dir == [1, 0]:
+                game.player.set_up()
 
         if display.digital_read(display.GPIO_KEY_DOWN_PIN) != 0:
-            game.player.set_down()
+            if game.player.dir == [-1, 0] or game.player.dir == [1, 0]:
+                game.player.set_down()
         
         if display.digital_read(display.GPIO_KEY_LEFT_PIN) != 0:
-            game.player.set_left()
+            if game.player.dir == [0, -1] or game.player.dir == [0, 1]:        
+                game.player.set_left()
 
         if display.digital_read(display.GPIO_KEY_RIGHT_PIN) != 0:
-            game.player.set_right()
+            if game.player.dir == [0, -1] or game.player.dir == [0, 1]:
+                game.player.set_right()
 
         # -------------------------------- Move snake -------------------------------- #
 
         current_time = time.time()
         if current_time - last_move_time >= move_interval:
-            game.send_collision_status()
+            game.iterate()
             last_move_time = current_time
 
         # ------------------------------ Show new image ------------------------------ #

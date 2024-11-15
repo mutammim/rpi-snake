@@ -13,7 +13,8 @@ class Food:
 
     def does_coord_have_food(self, x, y):
         for location in self.locations:
-            if location == (x, y):
+            if location[0] == x and location[1] == y:
+                print("food detected")
                 return True
 
     def get_nearest_valid_coord(self, value):
@@ -31,6 +32,7 @@ class Food:
                 )
 
                 if new_location not in blocked_coords:
+                    print(new_location)
                     location_is_valid = True
 
             self.locations.append(new_location)
@@ -48,3 +50,6 @@ class Food:
 
     def add_food(self, x, y):
         self.locations.append((x, y))
+
+    def remove_food(self, x, y):
+        self.locations.remove((x, y))

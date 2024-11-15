@@ -43,22 +43,21 @@ class Player:
 
         self.display.LCD_ShowImage(self.image, 0, 0)
 
-    def move(self, did_grow=False):
-        print(self.dir)
-        
-        # ------------------------------ Add new head :0 ----------------------------- #
+    def get_next_position(self):
         current_x = self.body[0][0]
         current_y = self.body[0][1]
         dir_x = self.dir[0]
         dir_y = self.dir[1]
 
-        print(current_x, current_y)
+        next_x = current_x + (dir_x * SCALE)
+        next_y = current_y + (dir_y * SCALE)
 
-        new_head = (
-            (current_x + (dir_x * SCALE)),
-            (current_y + (dir_y * SCALE))
-        )
+        return (next_x, next_y)
 
+    def move(self, did_grow=False):        
+        # ------------------------------ Add new head :0 ----------------------------- #
+
+        new_head = self.get_next_position()
         self.body.insert(0, new_head)
 
         # ------------------------------- Draw new head ------------------------------ #
@@ -94,7 +93,7 @@ class Player:
 
         self.display.LCD_ShowImage(self.image, 0, 0)
 
-    def handle_collision(self, collision_type):
+    def process_movement(self, collision_type):
         if (collision_type == 1):
             # Game over
             return
