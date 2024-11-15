@@ -34,8 +34,8 @@ class Player:
                 (
                     segment[0] - (HALF_SCALE),
                     segment[1] - (HALF_SCALE),
-                    segment[0] + (HALF_SCALE) - QUARTER_SCALE,
-                    segment[1] + (HALF_SCALE) - QUARTER_SCALE,
+                    segment[0] + (HALF_SCALE) - 1,
+                    segment[1] + (HALF_SCALE) - 1,
                 ),
                 outline=0xffff00,
                 fill=0xffff00
@@ -66,8 +66,8 @@ class Player:
             (
                 new_head[0] - (HALF_SCALE),
                 new_head[1] - (HALF_SCALE),
-                new_head[0] + (HALF_SCALE) - QUARTER_SCALE,
-                new_head[1] + (HALF_SCALE) - QUARTER_SCALE,
+                new_head[0] + (HALF_SCALE) - 1,
+                new_head[1] + (HALF_SCALE) - 1,
             ),
             outline=0xffff00,
             fill=0xffff00
@@ -80,8 +80,8 @@ class Player:
                 (
                     self.body[-1][0] - (HALF_SCALE),
                     self.body[-1][1] - (HALF_SCALE),
-                    self.body[-1][0] + (HALF_SCALE) - QUARTER_SCALE,
-                    self.body[-1][1] + (HALF_SCALE) - QUARTER_SCALE,
+                    self.body[-1][0] + (HALF_SCALE) - 1,
+                    self.body[-1][1] + (HALF_SCALE) - 1,
                 ),
                 outline=0x0,
                 fill=0x0
