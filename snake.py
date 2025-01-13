@@ -24,8 +24,8 @@ try:
     subtitle = "Press up to start..."
 
     draw.rectangle((0, 0, display.width, display.height), outline=0, fill="gray")
-    draw.text((60, 60), title, font=title_font, fill="white", anchor="mm")
-    draw.text((60, 78), subtitle, font=subtitle_font, fill="white", anchor="mm")
+    draw.text((64, 60), title, font=title_font, fill="white", anchor="mm")
+    draw.text((64, 78), subtitle, font=subtitle_font, fill="white", anchor="mm")
     display.LCD_ShowImage(image, 0, 0)
 
     waiting = True
@@ -78,8 +78,8 @@ try:
 
     while True:
         draw.rectangle((0, 0, display.width, display.height), outline=0, fill="gray")
-        draw.text((60, 30), "Game over!", font=title_font, fill="white", anchor="mm")
-        draw.text((60, 60), str(game.score), font=supertitle_font, fill="white", anchor="mm")
+        draw.text((64, 40), "Game over!", font=title_font, fill="white", anchor="mm")
+        draw.text((64, 80), str(game.score), font=supertitle_font, fill="white", anchor="mm")
         display.LCD_ShowImage(image, 0, 0)
 
 except Exception as e:
