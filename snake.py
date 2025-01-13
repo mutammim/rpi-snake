@@ -16,8 +16,8 @@ draw.rectangle((0, 0, display.width, display.height), outline=0, fill=0)
 display.LCD_ShowImage(image, 0, 0)
 
 try:
-    title_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 18)
-    subtitle_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 54)
+    title_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 12)
+    subtitle_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 6)
 
     title = "Snake"
     subtitle = "Press up to start..."
@@ -77,8 +77,8 @@ try:
 
     while True:
         draw.rectangle((0, 0, display.width, display.height), outline=0, fill="gray")
-        draw.text((72, 30), "Game over!", font=title_font, fill="white", anchor="mm")
-        draw.text((72, 60), str(game.score), font=subtitle_font, fill="white", anchor="mm")
+        draw.text((72, 30), "Game over!", font=subtitle_font, fill="white", anchor="mm")
+        draw.text((72, 60), str(game.score), font=title_font, fill="white", anchor="mm")
         display.LCD_ShowImage(image, 0, 0)
 
 except Exception as e:
